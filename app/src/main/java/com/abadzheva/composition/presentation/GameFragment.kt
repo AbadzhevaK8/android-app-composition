@@ -1,29 +1,10 @@
 package com.abadzheva.composition.presentation
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.abadzheva.composition.R
 import com.abadzheva.composition.databinding.FragmentGameBinding
 
-class GameFragment : Fragment() {
-    @Suppress("ktlint:standard:backing-property-naming")
-    private var _binding: FragmentGameBinding? = null
-    private val binding
-        get() = _binding ?: throw RuntimeException("FragmentGameBinding == null")
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentGameBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+class GameFragment : Fragment(R.layout.fragment_game) {
+    private val binding by viewBinding(FragmentGameBinding::bind)
 }

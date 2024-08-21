@@ -1,26 +1,14 @@
 package com.abadzheva.composition.presentation
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.abadzheva.composition.R
 import com.abadzheva.composition.databinding.FragmentWelcomeBinding
 
-class WelcomeFragment : Fragment() {
-    @Suppress("ktlint:standard:backing-property-naming")
-    private var _binding: FragmentWelcomeBinding? = null
-    private val binding: FragmentWelcomeBinding
-        get() = _binding ?: throw RuntimeException("FragmentWelcomeBinding == null")
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        _binding = FragmentWelcomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
+    private val binding by viewBinding(FragmentWelcomeBinding::bind)
 
     override fun onViewCreated(
         view: View,
@@ -29,10 +17,5 @@ class WelcomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonUnderstand.setOnClickListener {
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
