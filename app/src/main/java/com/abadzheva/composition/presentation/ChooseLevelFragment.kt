@@ -7,4 +7,8 @@ import com.abadzheva.composition.databinding.FragmentChooseLevelBinding
 
 class ChooseLevelFragment : Fragment(R.layout.fragment_choose_level) {
     private val binding by viewBinding(FragmentChooseLevelBinding::bind)
+
+    companion object {
+        fun newInstance() = ChooseLevelFragment()
+    }
 }
