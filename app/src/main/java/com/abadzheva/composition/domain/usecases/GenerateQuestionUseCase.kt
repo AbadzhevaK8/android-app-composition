@@ -6,7 +6,7 @@ import com.abadzheva.composition.domain.repository.GameRepository
 class GenerateQuestionUseCase(
     private val repository: GameRepository,
 ) {
-    operator fun invoke(): Question =
+    operator fun invoke(maxSumValue: Int): Question =
         repository.generateQuestion(
             maxSumValue = 100,
             countOfOptions = COUNT_OF_OPTIONS,
