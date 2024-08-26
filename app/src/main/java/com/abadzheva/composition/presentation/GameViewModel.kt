@@ -68,6 +68,7 @@ class GameViewModel(
         getGameSettings(level)
         startTimer()
         generateQuestion()
+        updateProgress()
     }
 
     fun chooseAnswer(number: Int) {

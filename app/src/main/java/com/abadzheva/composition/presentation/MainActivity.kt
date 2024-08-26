@@ -1,5 +1,7 @@
 package com.abadzheva.composition.presentation
 
+import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.abadzheva.composition.R
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -18,5 +21,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         // ------------------------------
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 }
