@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.abadzheva.composition.R
 import com.abadzheva.composition.databinding.FragmentGameBinding
@@ -19,11 +18,12 @@ import com.abadzheva.composition.domain.entity.Level
 class GameFragment : Fragment(R.layout.fragment_game) {
     private val binding by viewBinding(FragmentGameBinding::bind)
     private lateinit var level: Level
-    private val viewModel: GameViewModel by lazy {
-        ViewModelProvider(
-            this,
-            AndroidViewModelFactory.getInstance(requireActivity().application),
-        )[GameViewModel::class.java]
+
+    private val viewModelFactory by lazy {
+        GameViewModelFactory(level, requireActivity().application)
+    }
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
     }
 
     private val tvOptions by lazy {
@@ -55,7 +55,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         setClickListenersToOptions()
-        viewModel.startGame(level)
     }
 
     private fun setClickListenersToOptions() {
