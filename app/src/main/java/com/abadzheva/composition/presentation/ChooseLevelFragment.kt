@@ -3,6 +3,7 @@ package com.abadzheva.composition.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.abadzheva.composition.R
 import com.abadzheva.composition.databinding.FragmentChooseLevelBinding
@@ -33,12 +34,11 @@ class ChooseLevelFragment : Fragment(R.layout.fragment_choose_level) {
     }
 
     private fun launchGameFragment(level: Level) {
-        requireActivity()
-            .supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.main_container, GameFragment.newInstance(level))
-            .addToBackStack(GameFragment.NAME)
-            .commit()
+        val args =
+            Bundle().apply {
+                putParcelable(GameFragment.KEY_LEVEL, level)
+            }
+        findNavController().navigate(R.id.action_chooseLevelFragment_to_gameFragment, args)
     }
 
     companion object {
