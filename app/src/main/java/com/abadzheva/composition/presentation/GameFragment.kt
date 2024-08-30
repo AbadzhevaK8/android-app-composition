@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.abadzheva.composition.R
 import com.abadzheva.composition.databinding.FragmentGameBinding
@@ -17,11 +18,11 @@ import com.abadzheva.composition.domain.entity.GameResult
 import com.abadzheva.composition.domain.entity.Level
 
 class GameFragment : Fragment(R.layout.fragment_game) {
+    private val args by navArgs<GameFragmentArgs>()
     private val binding by viewBinding(FragmentGameBinding::bind)
-    private lateinit var level: Level
 
     private val viewModelFactory by lazy {
-        GameViewModelFactory(level, requireActivity().application)
+        GameViewModelFactory(args.level, requireActivity().application)
     }
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[GameViewModel::class.java]
@@ -36,11 +37,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
             add(binding.tvOption5)
             add(binding.tvOption6)
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseArgs()
     }
 
     override fun onCreateView(
@@ -107,12 +103,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 android.R.color.holo_red_light
             }
         return ContextCompat.getColor(requireContext(), colorResId)
-    }
-
-    private fun parseArgs() {
-        requireArguments().getParcelable<Level>(KEY_LEVEL)?.let {
-            level = it
-        }
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {

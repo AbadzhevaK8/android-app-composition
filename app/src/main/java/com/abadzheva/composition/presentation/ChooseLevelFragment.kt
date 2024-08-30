@@ -34,11 +34,11 @@ class ChooseLevelFragment : Fragment(R.layout.fragment_choose_level) {
     }
 
     private fun launchGameFragment(level: Level) {
-        val args =
-            Bundle().apply {
-                putParcelable(GameFragment.KEY_LEVEL, level)
-            }
-        findNavController().navigate(R.id.action_chooseLevelFragment_to_gameFragment, args)
+        findNavController().navigate(
+            ChooseLevelFragmentDirections.actionChooseLevelFragmentToGameFragment(
+                level,
+            ),
+        )
     }
 
     companion object {
