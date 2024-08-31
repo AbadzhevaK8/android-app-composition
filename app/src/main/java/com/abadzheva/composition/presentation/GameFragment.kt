@@ -15,7 +15,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.abadzheva.composition.R
 import com.abadzheva.composition.databinding.FragmentGameBinding
 import com.abadzheva.composition.domain.entity.GameResult
-import com.abadzheva.composition.domain.entity.Level
 
 class GameFragment : Fragment(R.layout.fragment_game) {
     private val args by navArgs<GameFragmentArgs>()
@@ -97,7 +96,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
     private fun getColorByState(it: Boolean): Int {
         val colorResId =
-            if (it) {
+            +if (it) {
                 android.R.color.holo_green_light
             } else {
                 android.R.color.holo_red_light
@@ -106,23 +105,6 @@ class GameFragment : Fragment(R.layout.fragment_game) {
     }
 
     private fun launchGameFinishedFragment(gameResult: GameResult) {
-        val args =
-            Bundle().apply {
-                putParcelable(GameFinishedFragment.KEY_GAME_RESULT, gameResult)
-            }
-        findNavController().navigate(R.id.action_gameFragment_to_gameFinishedFragment, args)
-    }
-
-    companion object {
-        const val KEY_LEVEL = "level"
-        const val NAME = "GameFragment"
-
-        fun newInstance(level: Level): GameFragment =
-            GameFragment().apply {
-                arguments =
-                    Bundle().apply {
-                        putParcelable(KEY_LEVEL, level)
-                    }
-            }
+        findNavController().navigate(GameFragmentDirections.actionGameFragmentToGameFinishedFragment(gameResult))
     }
 }
